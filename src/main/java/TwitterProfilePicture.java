@@ -3,6 +3,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
@@ -27,7 +28,9 @@ public class TwitterProfilePicture {
             BufferedImage img = ImageIO.read(url);
 
             File file = new File("ProfilePicture.jpg");
+            File file2 = new File("PictureChange.jpg");
             ImageIO.write(img, "jpg", file);
+            ImageIO.write(img, "jpg", file2);
 
             Thread.sleep(2000);
 

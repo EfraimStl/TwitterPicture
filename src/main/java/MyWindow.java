@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class MyWindow extends JFrame {
 
@@ -9,9 +11,12 @@ public class MyWindow extends JFrame {
     private int WINDOW_HEIGHT = 500;
     private int SPACE_BETWEEN_BUTTONS = 50;
 
-    //ImageProcess image = new ImageProcess();
+    ImageProcess image;
 
     JTextField userNameInsert = new JTextField();
+
+    BufferedImage imageIcon1;
+    BufferedImage imageIcon2;
 
     public MyWindow() {
         this.setVisible(true);
@@ -37,7 +42,20 @@ public class MyWindow extends JFrame {
 
         grayScaleButton.addActionListener((e -> {
 
-          //  image.grayScale();
+            for (int x = 0; x < imageIcon2.getWidth(); x++) {
+                for (int y = 0; y < imageIcon2.getHeight(); y++) {
+                    int pixel = imageIcon2.getRGB(x, y);
+                    Color color = new Color(pixel);
+
+                    int red = color.getRed();
+                    int green = color.getGreen();
+                    int blue = color.getBlue();
+
+                    int avarage = (red + green + blue) / 3;
+                    Color newColor = new Color(avarage, avarage, avarage);
+                    imageIcon2.setRGB(x, y, newColor.getRGB());
+                }
+            }
 
         }));
 
@@ -100,37 +118,47 @@ public class MyWindow extends JFrame {
 
         searchButton.addActionListener((e -> {
 
-            //TwitterProfilePicture profilePicture = new TwitterProfilePicture();
-          //  profilePicture.getProfilePicture(userNameInsert.getText());
-         ImageBox imageBox = new ImageBox(this);
-            /*ImageIcon imageIcon = new ImageIcon("ProfilePicture.jpg");
-            JLabel jLabel2 = new JLabel();
-            jLabel2.setIcon(imageIcon);
-            jLabel2.setVisible(true);
-            this.add(jLabel2);*/
-          // ImageBox2 imageBox2 = new ImageBox2(this);
-            //JFrame myFrame = new JFrame();
-           /* Icon myIcon = new ImageIcon("ProfilePicture.jpg");
-            JLabel label = new JLabel(myIcon);
-            this.add(label);*/
+            TwitterProfilePicture profilePicture = new TwitterProfilePicture();
+            profilePicture.getProfilePicture(userNameInsert.getText());
+            File file = new File("ProfilePicture.jpg");
+            File file2 = new File("PictureChange");
 
+            try {
+                imageIcon1 = ImageIO.read(file);
+//                אופציה של חריטה על המסך
+                Icon imageIcon = new ImageIcon("ProfilePicture.jpg");
+                JLabel jLabel1 = new JLabel(imageIcon);
+                jLabel1.setBounds(30, 30, getWINDOW_WIDTH() / 3, getWINDOW_HEIGHT() - 60);
+                this.add(jLabel1);
+//                אופציה של ציור על המסך
 
-            // ImageBox2 imageBox2 = new ImageBox2(this);
-           /*  grayScaleButton.setVisible(true);
-             mirrorButton.setVisible(true);
-             eliminateButton.setVisible(true);
-             negativeButton.setVisible(true);
-             lighterButton.setVisible(true);
-             darkerButton.setVisible(true);*/
+                imageIcon2 = ImageIO.read(file2);
+                paint(getGraphics());
+
+            } catch (IOException j) {
+                throw new RuntimeException(j);
+            }
+
+            grayScaleButton.setVisible(true);
+            mirrorButton.setVisible(true);
+            eliminateButton.setVisible(true);
+            negativeButton.setVisible(true);
+            lighterButton.setVisible(true);
+            darkerButton.setVisible(true);
         }));
 
     }
 
+    public void paint(Graphics g) {
+        super.paint(g);
+        g.drawImage(imageIcon2, 700, 200, null);
+    }
 
-    public int getWINDOW_WIDTH(){
+    public int getWINDOW_WIDTH() {
         return this.WINDOW_WIDTH;
     }
-    public int getWINDOW_HEIGHT(){
+
+    public int getWINDOW_HEIGHT() {
         return this.WINDOW_HEIGHT;
     }
 }
