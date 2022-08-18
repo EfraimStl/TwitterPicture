@@ -6,38 +6,27 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageBox extends JPanel {
-
-    MyWindow myWindow;
+public class ImageBox extends JFrame {
     BufferedImage imageIcon1;
+    public ImageBox(MyWindow window) {
 
-   public ImageBox(MyWindow window) {
+        File file = new File("ProfilePicture.jpg");
 
-       myWindow = window;
+         try {
+        imageIcon1 = ImageIO.read(file);
+        Icon imageIcon = new ImageIcon("ProfilePicture.jpg");
+        JLabel jLabel1 = new JLabel(imageIcon);
+        jLabel1.setBounds(30, 30, window.getWINDOW_WIDTH() / 3, window.getWINDOW_HEIGHT()-60);
+        this.add(jLabel1);
+        paint(getGraphics());
 
-       File file = new File("ProfilePicture.jpg");
-
-       ImageIcon imageIcon = new ImageIcon("ProfilePicture.jpg");
-
-
-       try {
-           imageIcon1 = ImageIO.read(file);
-
-           JPanel jPanel = new JPanel();
-           jPanel.setSize(myWindow.getWINDOW_WIDTH() / 3, myWindow.getWINDOW_HEIGHT());
-           JLabel jLabel1 = new JLabel(new ImageIcon(imageIcon1));
-           jLabel1.setBounds(0, 0, myWindow.getWINDOW_WIDTH() / 3, myWindow.getWINDOW_HEIGHT());
-           jLabel1.setVisible(true);
-           jPanel.add(jLabel1);
-
-       } catch (IOException e) {
+         } catch (IOException e) {
            throw new RuntimeException(e);
-       }
-
+          }
+    }
+public void paint(Graphics g){
+       super.paint(g);
+       g.drawImage(imageIcon1, 700, 50 , null);
    }
-   public void paintComponent(Graphics g){
-       super.paintComponent(g);
-       g.drawImage(imageIcon1, 0, 0 , this);
-   }
-   }
+}
 

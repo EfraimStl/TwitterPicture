@@ -23,12 +23,10 @@ public class TwitterProfilePicture {
             Thread.sleep(2000);
            WebElement element = driver.findElement(By.className("css-9pa8cd"));
             String path = element.getAttribute("src");
-            //String paath = "https://pbs.twimg.com/profile_images/1537331123314892801/FJ_aGeBm_400x400.jpg";
             URL url = new URL(path);
             BufferedImage img = ImageIO.read(url);
 
             File file = new File("ProfilePicture.jpg");
-            //file.createNewFile();
             ImageIO.write(img, "jpg", file);
 
             Thread.sleep(2000);

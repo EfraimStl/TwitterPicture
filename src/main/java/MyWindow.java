@@ -1,5 +1,7 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class MyWindow extends JFrame {
 
@@ -19,7 +21,6 @@ public class MyWindow extends JFrame {
         this.setLocationRelativeTo(null);
         this.setLayout(null);
         this.setBackground(Color.white);
-
 
         JButton searchButton = new JButton();
         searchButton.setBounds(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 12, 100, 40);
@@ -101,14 +102,26 @@ public class MyWindow extends JFrame {
 
             //TwitterProfilePicture profilePicture = new TwitterProfilePicture();
           //  profilePicture.getProfilePicture(userNameInsert.getText());
-           ImageBox imageBox = new ImageBox(this);
-           ImageBox2 imageBox2 = new ImageBox2(this);
-             grayScaleButton.setVisible(true);
+         ImageBox imageBox = new ImageBox(this);
+            /*ImageIcon imageIcon = new ImageIcon("ProfilePicture.jpg");
+            JLabel jLabel2 = new JLabel();
+            jLabel2.setIcon(imageIcon);
+            jLabel2.setVisible(true);
+            this.add(jLabel2);*/
+          // ImageBox2 imageBox2 = new ImageBox2(this);
+            //JFrame myFrame = new JFrame();
+           /* Icon myIcon = new ImageIcon("ProfilePicture.jpg");
+            JLabel label = new JLabel(myIcon);
+            this.add(label);*/
+
+
+            // ImageBox2 imageBox2 = new ImageBox2(this);
+           /*  grayScaleButton.setVisible(true);
              mirrorButton.setVisible(true);
              eliminateButton.setVisible(true);
              negativeButton.setVisible(true);
              lighterButton.setVisible(true);
-             darkerButton.setVisible(true);
+             darkerButton.setVisible(true);*/
         }));
 
     }
