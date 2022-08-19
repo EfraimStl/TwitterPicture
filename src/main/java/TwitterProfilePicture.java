@@ -28,9 +28,9 @@ public class TwitterProfilePicture {
             BufferedImage img = ImageIO.read(url);
 
             File file = new File("ProfilePicture.jpg");
-            File file2 = new File("PictureChange.jpg");
+           // File file2 = new File("PictureChange.jpg");
             ImageIO.write(img, "jpg", file);
-            ImageIO.write(img, "jpg", file2);
+           // ImageIO.write(img, "jpg", file2);
 
             Thread.sleep(2000);
 

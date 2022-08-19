@@ -5,14 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class ImageProcess {
 
-     BufferedImage image;
-
-     public ImageProcess(BufferedImage image){
-         this.image = image;
-     }
-
-
-    public void grayScale() {
+    public void grayScale(BufferedImage image) {
 
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
@@ -30,7 +23,7 @@ public class ImageProcess {
         }
     }
 
-    public void mirror() {
+    public void mirror(BufferedImage image) {
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 int pixel = image.getRGB(x, y);
@@ -41,7 +34,7 @@ public class ImageProcess {
         }
     }
 
-    public void negative(){
+    public void negative(BufferedImage image){
 
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
@@ -58,7 +51,7 @@ public class ImageProcess {
 
     }
 
-    public void eliminate(){
+    public void eliminate(BufferedImage image){
 
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
@@ -75,7 +68,7 @@ public class ImageProcess {
         }
     }
 
-    public void Lighter (){
+    public void Lighter (BufferedImage image){
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 int pixel = image.getRGB(x, y);
@@ -92,7 +85,7 @@ public class ImageProcess {
         }
     }
 
-    public void Darker (){
+    public void Darker (BufferedImage image){
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 int pixel = image.getRGB(x, y);
