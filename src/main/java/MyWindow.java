@@ -156,7 +156,7 @@ public class MyWindow extends JFrame {
 
                 Icon imageIcon = new ImageIcon("ProfilePicture.jpg");
                 JLabel jLabel1 = new JLabel(imageIcon);
-                jLabel1.setBounds(30, 30, getWINDOW_WIDTH() / 3, getWINDOW_HEIGHT() - 60);
+                jLabel1.setBounds(30, 30, getWINDOW_WIDTH() / 3, getWINDOW_HEIGHT());
                 this.add(jLabel1);
 
                 paint(getGraphics(), imageIcon1);
@@ -177,7 +177,9 @@ public class MyWindow extends JFrame {
 
     public void paint(Graphics g, BufferedImage image) {
         super.paint(g);
-        g.drawImage(image, 700, 200, null);
+
+        g.drawImage(image, 620, 30, null);
+
            }
 
     public int getWINDOW_WIDTH() {
