@@ -12,11 +12,13 @@ public class MyWindow extends JFrame {
     private int SPACE_BETWEEN_BUTTONS = 50;
 
     JTextField userNameInsert = new JTextField();
+    ImageProcess imageProcess = new ImageProcess();
 
     BufferedImage imageIcon1;
     BufferedImage imageIcon2;
 
     public MyWindow() {
+
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -39,21 +41,14 @@ public class MyWindow extends JFrame {
         this.add(grayScaleButton);
 
         grayScaleButton.addActionListener((e -> {
-            ImageProcess imageProcess = new ImageProcess();
-            imageIcon2 = imageIcon1;
             imageProcess.grayScale(imageIcon1);
 
-            File output = new File("ProfilePicture.jpg");
-            try {
-                ImageIO.write(imageIcon1, "jpg", output);
-                paint(getGraphics());
+                paint(getGraphics(), imageIcon1);
 
-
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-
-
+                try {
+                    imageIcon1 = ImageIO.read(new File("ProfilePicture.jpg"));
+                }catch (IOException exc){
+                }
         }));
 
         JButton mirrorButton = new JButton();
@@ -63,6 +58,14 @@ public class MyWindow extends JFrame {
         this.add(mirrorButton);
 
         mirrorButton.addActionListener((e -> {
+            try {
+            imageIcon2 = ImageIO.read(new File("ProfilePicture.jpg"));
+            imageProcess.mirror(imageIcon2, imageIcon1);
+            paint(getGraphics(), imageIcon2);
+
+            imageIcon1 = ImageIO.read(new File("ProfilePicture.jpg"));
+            }catch (IOException exc){
+            }
 
         }));
 
@@ -74,6 +77,13 @@ public class MyWindow extends JFrame {
 
         negativeButton.addActionListener((e -> {
 
+            imageProcess.negative(imageIcon1);
+            paint(getGraphics(), imageIcon1);
+
+            try {
+                imageIcon1 = ImageIO.read(new File("ProfilePicture.jpg"));
+            }catch (IOException exc){
+            }
 
         }));
 
@@ -85,6 +95,13 @@ public class MyWindow extends JFrame {
 
         eliminateButton.addActionListener((e -> {
 
+            imageProcess.eliminateGreen(imageIcon1);
+            paint(getGraphics(), imageIcon1);
+
+            try {
+                imageIcon1 = ImageIO.read(new File("ProfilePicture.jpg"));
+            }catch (IOException exc){
+            }
         }));
 
         JButton lighterButton = new JButton();
@@ -94,6 +111,13 @@ public class MyWindow extends JFrame {
         this.add(lighterButton);
 
         lighterButton.addActionListener((e -> {
+            imageProcess.lighter(imageIcon1);
+            paint(getGraphics(), imageIcon1);
+
+            try {
+                imageIcon1 = ImageIO.read(new File("ProfilePicture.jpg"));
+            }catch (IOException exc){
+            }
 
         }));
         JButton darkerButton = new JButton();
@@ -104,6 +128,13 @@ public class MyWindow extends JFrame {
 
         darkerButton.addActionListener((e -> {
 
+            imageProcess.darker(imageIcon1);
+            paint(getGraphics(),imageIcon1);
+
+            try {
+                imageIcon1 = ImageIO.read(new File("ProfilePicture.jpg"));
+            }catch (IOException exc){
+            }
         }));
 
         //textField for user name
@@ -118,21 +149,17 @@ public class MyWindow extends JFrame {
              TwitterProfilePicture profilePicture = new TwitterProfilePicture();
            profilePicture.getProfilePicture(userNameInsert.getText());
             File file = new File("ProfilePicture.jpg");
-           // File file2 = new File("PictureChange");
 
 
             try {
-               // Thread.sleep(2000);
                 imageIcon1 = ImageIO.read(file);
-//                אופציה של חריטה על המסך
+
                 Icon imageIcon = new ImageIcon("ProfilePicture.jpg");
                 JLabel jLabel1 = new JLabel(imageIcon);
                 jLabel1.setBounds(30, 30, getWINDOW_WIDTH() / 3, getWINDOW_HEIGHT() - 60);
                 this.add(jLabel1);
-//                אופציה של ציור על המסך
 
-             //   imageIcon2 = ImageIO.read(file2);
-                paint(getGraphics());
+                paint(getGraphics(), imageIcon1);
 
             } catch (Exception j) {
                 throw new RuntimeException(j);
@@ -148,10 +175,10 @@ public class MyWindow extends JFrame {
 
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g, BufferedImage image) {
         super.paint(g);
-        g.drawImage(imageIcon1, 700, 200, null);
-    }
+        g.drawImage(image, 700, 200, null);
+           }
 
     public int getWINDOW_WIDTH() {
         return this.WINDOW_WIDTH;

@@ -23,13 +23,13 @@ public class ImageProcess {
         }
     }
 
-    public void mirror(BufferedImage image) {
+    public void mirror(BufferedImage help, BufferedImage image) {
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 int pixel = image.getRGB(x, y);
                 Color color = new Color(pixel);
 
-                image.setRGB(image.getWidth() - x - 1, y, color.getRGB());
+                help.setRGB(image.getWidth() - x - 1, y, color.getRGB());
             }
         }
     }
@@ -45,30 +45,32 @@ public class ImageProcess {
                 int green = color.getGreen();
                 int blue = color.getBlue();
 
-                image.setRGB(255 - red, 255 - green, 255 - blue);
+                Color color1 = new Color(255 - red, 255 - green, 255 - blue);
+                image.setRGB(x,y,color1.getRGB());
             }
         }
 
     }
 
-    public void eliminate(BufferedImage image){
+    public void eliminateGreen(BufferedImage image){
 
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 int pixel = image.getRGB(x, y);
                 Color color = new Color(pixel);
 
+                int red = color.getRed();
                 int green = color.getGreen();
                 int blue = color.getBlue();
 
 
-                Color newColor = new Color(green, green, blue);
+                Color newColor = new Color(red, blue, blue);
                 image.setRGB(x, y, newColor.getRGB());
             }
         }
     }
 
-    public void Lighter (BufferedImage image){
+    public void lighter (BufferedImage image){
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 int pixel = image.getRGB(x, y);
@@ -78,14 +80,13 @@ public class ImageProcess {
                 int green = color.getGreen();
                 int blue = color.getBlue();
 
-                Color newColor = new Color(intenseColor(red, 1.3), intenseColor(green, 1.2), intenseColor(blue, 1.2));
-               image.setRGB(x, y, newColor.getRGB());
-                // image.setRGB(intenseColor(red, 1.3), intenseColor(green, 1.2), intenseColor(blue, 1.2));
+                Color newColor = new Color(intenseColor(red, 1.5), intenseColor(green, 1.5), intenseColor(blue, 1.5));
+                image.setRGB(x, y, newColor.getRGB());
             }
         }
     }
 
-    public void Darker (BufferedImage image){
+    public void darker (BufferedImage image){
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 int pixel = image.getRGB(x, y);
@@ -95,7 +96,8 @@ public class ImageProcess {
                 int green = color.getGreen();
                 int blue = color.getBlue();
 
-                image.setRGB(intenseColor(red, 0.7), intenseColor(green, 0.7), intenseColor(blue, 0.7));
+                Color newColor = new Color(intenseColor(red, 0.7), intenseColor(green, 0.7), intenseColor(blue, 0.7));
+                image.setRGB(x, y, newColor.getRGB());
             }
         }
     }
