@@ -18,7 +18,6 @@ public class TwitterProfilePicture {
        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver_win32\\chromedriver.exe");
         try {
             driver = new ChromeDriver();
-            profile="St_David12";
             driver.get("https://twitter.com/" + profile+"/photo");
 
             Thread.sleep(2000);
@@ -28,9 +27,7 @@ public class TwitterProfilePicture {
             BufferedImage img = ImageIO.read(url);
 
             File file = new File("ProfilePicture.jpg");
-           // File file2 = new File("PictureChange.jpg");
             ImageIO.write(img, "jpg", file);
-           // ImageIO.write(img, "jpg", file2);
 
             Thread.sleep(2000);
 
