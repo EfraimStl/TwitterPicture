@@ -178,7 +178,7 @@ public class MyWindow extends JFrame {
     public void paint(Graphics g, BufferedImage image) {
         super.paint(g);
 
-        g.drawImage(image, 620, 30, null);
+        g.drawImage(image, 620, 200, null);
 
            }
 
